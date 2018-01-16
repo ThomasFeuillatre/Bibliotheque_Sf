@@ -29,6 +29,13 @@ class Reader
     private $name;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateAbonnement", type="date", nullable=true)
+     */
+    private $dateAbonnement;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="FirstName", type="string", length=255)
@@ -36,10 +43,9 @@ class Reader
     private $firstName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Borrow", inversedBy="reader")
-     * @ORM\JoinColumn(name="borrow_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Borrow", mappedBy="reader")
      */
-    private $borrow;
+    private $borrows;
     /**
      * Get id
      *
@@ -99,26 +105,67 @@ class Reader
     }
 
     /**
-     * Set borrow
+     * Get borrow
+     *
+     * @return \AppBundle\Entity\Borrow
+     */
+    public function getBorrows()
+    {
+        return $this->borrows;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->borrows = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add borrow
      *
      * @param \AppBundle\Entity\Borrow $borrow
      *
      * @return Reader
      */
-    public function setBorrow(\AppBundle\Entity\Borrow $borrow = null)
+    public function addBorrow(\AppBundle\Entity\Borrow $borrow)
     {
-        $this->borrow = $borrow;
+        $this->borrows[] = $borrow;
 
         return $this;
     }
 
     /**
-     * Get borrow
+     * Remove borrow
      *
-     * @return \AppBundle\Entity\Borrow
+     * @param \AppBundle\Entity\Borrow $borrow
      */
-    public function getBorrow()
+    public function removeBorrow(\AppBundle\Entity\Borrow $borrow)
     {
-        return $this->borrow;
+        $this->borrows->removeElement($borrow);
+    }
+
+    /**
+     * Set dateAbonnement
+     *
+     * @param \DateTime $dateAbonnement
+     *
+     * @return Reader
+     */
+    public function setDateAbonnement($dateAbonnement)
+    {
+        $this->dateAbonnement = $dateAbonnement;
+
+        return $this;
+    }
+
+    /**
+     * Get dateAbonnement
+     *
+     * @return \DateTime
+     */
+    public function getDateAbonnement()
+    {
+        return $this->dateAbonnement;
     }
 }

@@ -937,98 +937,110 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="237" parent="233" name="borrow_id">
+    <column id="237" parent="233" name="Title">
       <Position>2</Position>
-      <DataType>int(11)|0</DataType>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="238" parent="233" name="Title">
+    <column id="238" parent="233" name="Summary">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="239" parent="233" name="Summary">
-      <Position>4</Position>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="240" parent="233" name="IDX_CBE5A331D4C006C8">
-      <ColNames>borrow_id</ColNames>
-    </index>
-    <key id="241" parent="233" name="PRIMARY">
+    <key id="239" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="242" parent="233" name="FK_CBE5A331D4C006C8">
-      <ColNames>borrow_id</ColNames>
-      <RefSchemaName>bibliotheque_sf</RefSchemaName>
-      <RefTableName>borrow</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="243" parent="234" name="id">
+    <column id="240" parent="234" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="244" parent="234" name="DateBorrow">
+    <column id="241" parent="234" name="DateBorrow">
       <Position>2</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="245" parent="234" name="Deadline">
+    <column id="242" parent="234" name="Deadline">
       <Position>3</Position>
       <DataType>date|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="246" parent="234" name="PRIMARY">
+    <column id="243" parent="234" name="book_id">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="244" parent="234" name="reader_id">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="245" parent="234" name="statut">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="246" parent="234" name="IDX_55DBA8B016A2B381">
+      <ColNames>book_id</ColNames>
+    </index>
+    <index id="247" parent="234" name="IDX_55DBA8B01717D737">
+      <ColNames>reader_id</ColNames>
+    </index>
+    <key id="248" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="247" parent="235" name="id">
+    <foreign-key id="249" parent="234" name="FK_55DBA8B016A2B381">
+      <ColNames>book_id</ColNames>
+      <RefSchemaName>bibliotheque_sf</RefSchemaName>
+      <RefTableName>book</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="250" parent="234" name="FK_55DBA8B01717D737">
+      <ColNames>reader_id</ColNames>
+      <RefSchemaName>bibliotheque_sf</RefSchemaName>
+      <RefTableName>reader</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="251" parent="235" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="248" parent="235" name="borrow_id">
+    <column id="252" parent="235" name="Name">
       <Position>2</Position>
-      <DataType>int(11)|0</DataType>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="249" parent="235" name="Name">
+    <column id="253" parent="235" name="FirstName">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="250" parent="235" name="FirstName">
+    <column id="254" parent="235" name="dateAbonnement">
       <Position>4</Position>
-      <DataType>varchar(255)|0</DataType>
+      <DataType>date|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="251" parent="235" name="IDX_CC3F893CD4C006C8">
-      <ColNames>borrow_id</ColNames>
-    </index>
-    <key id="252" parent="235" name="PRIMARY">
+    <key id="255" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="253" parent="235" name="FK_CC3F893CD4C006C8">
-      <ColNames>borrow_id</ColNames>
-      <RefSchemaName>bibliotheque_sf</RefSchemaName>
-      <RefTableName>borrow</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
   </database-model>
 </dataSource>

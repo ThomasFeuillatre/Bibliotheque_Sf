@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+    {{ parent() }}
+    <h3>Liste des trois derniers lecteurs</h3>
+{% endblock %}
+{% block body %}
+{%  for reader in readers %}
+    {{ reader.name }}
+{% endfor %}
+
+{% endblock %}
+
+
+

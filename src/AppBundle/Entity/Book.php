@@ -36,10 +36,9 @@ class Book
     private $summary;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Borrow", inversedBy="book")
-     * @ORM\JoinColumn(name="borrow_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Borrow", mappedBy="book")
      */
-    private $borrow;
+    private $borrows;
 
     /**
      * Get id
@@ -100,26 +99,43 @@ class Book
     }
 
     /**
-     * Set borrow
+     * Get borrow
+     *
+     * @return \AppBundle\Entity\Borrow
+     */
+    public function getBorrows()
+    {
+        return $this->borrows;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->borrows = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add borrow
      *
      * @param \AppBundle\Entity\Borrow $borrow
      *
      * @return Book
      */
-    public function setBorrow(\AppBundle\Entity\Borrow $borrow = null)
+    public function addBorrow(\AppBundle\Entity\Borrow $borrow)
     {
-        $this->borrow = $borrow;
+        $this->borrows[] = $borrow;
 
         return $this;
     }
 
     /**
-     * Get borrow
+     * Remove borrow
      *
-     * @return \AppBundle\Entity\Borrow
+     * @param \AppBundle\Entity\Borrow $borrow
      */
-    public function getBorrow()
+    public function removeBorrow(\AppBundle\Entity\Borrow $borrow)
     {
-        return $this->borrow;
+        $this->borrows->removeElement($borrow);
     }
 }

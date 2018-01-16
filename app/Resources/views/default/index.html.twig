@@ -1,8 +1,36 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
+    <h3>Liste des livres <a href="{{ path('addBook') }}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a></h3>
+    {% for book in  listBook %}
+        <div>
+            <h5>{{ book.title }}</h5>
+            <p>{{ book.summary }}</p>
+        </div>
+    {% endfor %}
 
+    <h3>Liste des lecteurs  <a href="{{ path('addReader') }}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a></h3>
+    {% for reader in listReader %}
+        <div>
+            <p>{{ reader.firstname }} {{ reader.name }} <a href="{{ path('detailReader', {'id': reader.id}) }}">Détail</a></p>
+        </div>
+    {% endfor %}
+    <h3>Liste des emprunts  <a href="{{ path('borrowManager') }}" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a></h3>
+    {% for borrow in listBorrow %}
+        <div>
+            <p>{{ borrow.reader.name }} à emprunté {{ borrow.book.title }} le {{ borrow.dateBorrow|date("d/M /Y") }}
+                {% set difference = date(borrow.deadline).diff(date("now")) %}
+                {% set leftDay = difference.days %}
+                {% if(leftDay-1 == -1 ) %}
+                <span style="color: red">emprunt trop long</span>
+                {% endif %}
+            </p>
+        </div>
+        {% for date in listAbo  %}
+            {{ date.name }}
+        {% endfor %}
+    {% endfor %}
+    <h3><a href="{{ path('thirdReaders') }}">3 derniers lecteurs</a></h3>
 {% endblock %}
 
 {% block stylesheets %}

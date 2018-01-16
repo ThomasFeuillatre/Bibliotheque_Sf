@@ -10,4 +10,25 @@ namespace AppBundle\Repository;
  */
 class ReaderRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getListAboToday()
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->select('r');
+        $qb->from('Reader', 'r');
+        $qb->where('r.dateAbonnement = :today');
+        $qb->setParameter('today', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME);
+
+    }
+
+    public function get3FirstReader()
+    {
+        $qb = $this->createQueryBuilder('r');
+//        $qb->select('r');
+//        $qb->from('AppBundle:Reader','r');
+        $qb->setMaxResults(3);
+        $query = $qb->getQuery();
+        $result = $query->getArrayResult();
+        return $result;
+    }
 }

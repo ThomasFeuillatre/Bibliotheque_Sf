@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+{% block header %}
+    {{ parent() }}
+    <h3>Détail de {{ reader.name }}
+    <a href="{{ path('addReader', {'id': reader.id}) }}" class="btn-edit btn-floating btn-large waves-effect waves-light red"><i class="material-icons">edit</i></a>
+    </h3>
+{% endblock %}
+{% block body %}
+    <table>
+        <thead>
+            <th>Nom du livre</th>
+            <th>Date d'emprunt</th>
+            <th>Date de retour maximal</th>
+        </thead>
+        <tbody  style="text-align: center">
+        {% for borrow in reader.borrows %}
+            {% if(borrow.statut != 1) %}
+                {% set statut_borrow = "En attente" %}
+                {% set difference = date(date("now")).diff(borrow.dateBorrow) %}
+                {% set leftDay = difference.days %}
+                {% if(leftDay-1 > 21  ) %}
+                    {% set statut_borrow = "En retard" %}
+                {% endif %}
+                {% else %}
+                    {% set statut_borrow = "Rendu" %}
+            {% endif %}
+            <tr>
+                    <td>{{ borrow.book.title }}</td>
+                    <td> {{ borrow.dateBorrow|date("d/M /Y") }}</td>
+                    <td>{{ borrow.deadline|date("d/M /Y") }}</td>
+                    <td>
+                        <a href="{{ path('rendu', {'id': borrow.id}) }}" class="waves-effect waves-light btn"> Rendu</a>
+                        <a href="{{ path('prolong', {'id': borrow.id}) }}" class="waves-effect waves-light btn"> Prolonger</a>
+                    </td>
+                    <td>
+                        {{ statut_borrow }}
+                    </td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

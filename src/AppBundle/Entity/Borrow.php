@@ -13,8 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Borrow
 {
     /**
-     * @var int
-     *
+     * @var
+     *int
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -36,15 +36,23 @@ class Borrow
     private $deadline;
 
     /**
-     * @ORM\OneToMany(targetEntity="Book", mappedBy="borrow")
+     * @ORM\ManyToOne(targetEntity="Book", inversedBy="borrows")
+     * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
      */
     private $book;
 
     /**
-     * @ORM\OneToMany(targetEntity="Reader", mappedBy="borrow")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reader", inversedBy="borrows")
+     * @ORM\JoinColumn(name="reader_id", referencedColumnName="id")
      */
     private $reader;
 
+    /**
+     * @var \Integer
+     *
+     * @ORM\Column(name="statut", type="integer")
+     */
+    private $statut = 0;
 
     /**
      * Get id
@@ -178,5 +186,57 @@ class Borrow
     public function getReader()
     {
         return $this->reader;
+    }
+
+    /**
+     * Set book
+     *
+     * @param \AppBundle\Entity\Book $book
+     *
+     * @return Borrow
+     */
+    public function setBook(\AppBundle\Entity\Book $book = null)
+    {
+        $this->book = $book;
+
+        return $this;
+    }
+
+    /**
+     * Set reader
+     *
+     * @param \AppBundle\Entity\Reader $reader
+     *
+     * @return Borrow
+     */
+    public function setReader(\AppBundle\Entity\Reader $reader = null)
+    {
+        $this->reader = $reader;
+
+        return $this;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param integer $statut
+     *
+     * @return Borrow
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return integer
+     */
+    public function getStatut()
+    {
+        return $this->statut;
     }
 }

@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class BorrowRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function getListAboToday()
+    {
+        $qb = $this->createQueryBuilder('r');
+        $qb->select('r');
+        $qb->from('Reader', 'r');
+        $qb->where('r.dateAbonnement = :today');
+        $qb->setParameter('today', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME);
+    }
 }
